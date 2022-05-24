@@ -25,11 +25,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws EmailNotFoundException{
+        System.out.println("email = " + email);
         UserDomain userDomain = userRepository.findByEmail(email);
+        List<GrantedAuthority> authorities = new ArrayList<>();
+
+        if("admin".equals(email))
+            authorities.add(new SimpleGrantedAuthority(Role.ADMIN.getValue()));
+        else
+            authorities.add(new SimpleGrantedAuthority(Role.MEMBER.getValue()));
 
         if(userDomain == null) throw new EmailNotFoundException("NOT Found account.");
 
-        return (UserDetails) userDomain;
+        return new User(userDomain.getEmail(), userDomain.getPassword(), authorities);
     }
 
     @Override

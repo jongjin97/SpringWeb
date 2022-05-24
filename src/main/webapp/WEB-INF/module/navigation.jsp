@@ -57,7 +57,7 @@
                         
                     </ul>
                     <sec:authorize access="isAuthenticated()">
-                   		<a class="navbar-brand" sec:authentication="name">님</a>
+                   		<a class="navbar-brand"><span sec:authentication="name"></span>님</a>
                    		<form class="d-flex">
 	                        <button class="btn btn-outline-dark" type="button" onclick="location.href='logout'">
 	                            Logout

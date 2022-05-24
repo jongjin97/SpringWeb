@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,9 +33,11 @@ public class UserController {
 	
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login(@ModelAttribute("loginUser")LoginUser loginUser) {
+	public String login(Model model) {
+		model.addAttribute("LoginUser", new User());
 		return "Login";
 	}
+	/*
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String loginUser(@ModelAttribute("loginUser")LoginUser loginUser, Errors errors, HttpSession session, HttpServletRequest request) {
 		if(errors.hasErrors())
@@ -50,7 +53,7 @@ public class UserController {
 			return "Login";
 		}
 	}
-	
+	*/
 	@RequestMapping(value = "/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();

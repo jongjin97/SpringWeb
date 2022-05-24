@@ -49,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true);
 
         http.exceptionHandling()
-                .accessDeniedPage("/denied");
+                .accessDeniedPage("/main");
 
         http.csrf()
                 .ignoringAntMatchers("/h2-console/**").disable()

@@ -3,9 +3,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http// www.w3.org/TR/html4/loose.dtd>
 <html>
-<head>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset="UTF-8">
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
@@ -30,13 +31,14 @@
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
                                     <div class="card-body">
-                                        <form:form action="login" method="post" modelAttribute="loginUser">
+                                        <form action="login" method="post">
+                                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                                             <div class="form-floating mb-3">
-                                                <form:input class="form-control" path="email" type="email" placeholder="name@example.com" />
+                                                <input class="form-control" path="email" type="email" name = "username" placeholder="name@example.com" />
                                                 <label for="inputEmail">Email address</label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <form:input class="form-control" path="password" type="password" placeholder="Password" />
+                                                <input class="form-control" path="password" type="password" name="password" placeholder="Password" />
                                                 <label for="inputPassword">Password</label>
                                             </div>
                                             <div class="form-check mb-3">
@@ -47,7 +49,7 @@
                                                 <a class="small" href="password.html">Forgot Password?</a>
                                                 <input class="btn btn-primary" type="submit" value="Login"></a>
                                             </div>
-                                        </form:form>
+                                        </form>
                                     </div>
                                     <div class="card-footer text-center py-3">
                                         <div class="small"><a href="register.html">Need an account? Sign up!</a></div>

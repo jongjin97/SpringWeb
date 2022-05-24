@@ -22,9 +22,9 @@ public class UserDao {
 	@Autowired
 	private UserRepository userRepository;
 
-	public UserDomain selectByEmail(String email) {
+	public UserDomain selectByEmail(String username) {
 		//List<User> results = jdbc.query("select * from USER where email = ?", memRowMapper, email);
-		UserDomain results = userRepository.findByEmail(email);
+		UserDomain results = userRepository.findByEmail(username);
 		return results == null ? null : results;
 	}
 	public List<UserDomain> selectAll(){
