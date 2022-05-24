@@ -41,13 +41,13 @@ public class ProductController {
 	private ProductSelectService productSelectService;
 	
 	
-	@RequestMapping(value="/addProduct", method = RequestMethod.GET)
+	@RequestMapping(value="/manage/addProduct", method = RequestMethod.GET)
 	public String addProductView(@ModelAttribute("product") Product product) {
 
 		return "addProduct";
 	}
 	
-	@RequestMapping(value="/addProduct", method=RequestMethod.POST)
+	@RequestMapping(value="/manage/addProduct", method=RequestMethod.POST)
 	public String addProduct(HttpServletRequest req, HttpServletResponse response, MultipartFile file, @ModelAttribute("product")Product product)
 			throws IOException {
 		String originalName = file.getOriginalFilename();
@@ -78,7 +78,7 @@ public class ProductController {
 		
 		
 		
-		return "Main";
+		return "redirect:/main";
 	}
 
 	@RequestMapping(value = "/fileupload", method = RequestMethod.POST)
@@ -133,7 +133,7 @@ public class ProductController {
 		return null;
 	}
 
-	@RequestMapping(value="/ProductView", method=RequestMethod.GET)
+	@RequestMapping(value="/product/ProductView", method=RequestMethod.GET)
 	public String ProductView(@RequestParam("device") String device, Model model) {
 		List<ProductDomain> list = productListService.productList(device);
 
@@ -141,7 +141,7 @@ public class ProductController {
 		return "ProductView";
 	}
 	
-	@RequestMapping(value="/detail", method=RequestMethod.GET)
+	@RequestMapping(value="/product/detail", method=RequestMethod.GET)
 	public String ProductDetail(@RequestParam("name") String name, Model model) {
 		System.out.println(name);
 		ProductDomain product= productSelectService.selectProduct(name);

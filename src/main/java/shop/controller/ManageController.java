@@ -3,6 +3,7 @@ package shop.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Role;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -32,8 +33,9 @@ public class ManageController {
 	private DeleteProductService deleteProductService;
 	@Autowired
 	private SelectAllUser selectAllUser;
-	
-	@RequestMapping("manageProduct")
+
+
+	@RequestMapping("manage/manageProduct")
 	public String manageProductView(Model model) {
 		List<ProductDomain> list = allProductSelectService.productList();
 		model.addAttribute("list", list);
@@ -41,7 +43,7 @@ public class ManageController {
 		return "manageProduct"; 
 	}
 	
-	@RequestMapping(value="modifyProduct", method = RequestMethod.GET)
+	@RequestMapping(value="manage/modifyProduct", method = RequestMethod.GET)
 	public String modifyProductView(Model model, @RequestParam("name")String name) {
 		ProductDomain product = productSelectService.selectProduct(name);
 		model.addAttribute("product", product);
@@ -55,13 +57,13 @@ public class ManageController {
 		return "redirect:/manageProduct"; 
 	}
 	
-	@RequestMapping(value ="deleteProduct")
+	@RequestMapping(value ="manage/deleteProduct")
 	public String deleteProduct(@RequestParam("name")String name) {
 		deleteProductService.deleteProduct(name);
 		return "redirect:/manageProduct";
 	}
 	
-	@RequestMapping(value="manageUser", method=RequestMethod.GET)
+	@RequestMapping(value="manage/manageUser", method=RequestMethod.GET)
 	public String manageUserView(Model model) {
 		List<UserDomain> list = selectAllUser.SelectAll();
 		model.addAttribute("list", list);

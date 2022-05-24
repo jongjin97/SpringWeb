@@ -33,8 +33,8 @@
 		                    <div>
 		                    	<c:forEach var="list" items="${list }">
 			                    	<div style="width:100%; float:left;">
-			                    		<div style="width:10%; float:left;">
-			                    			<p>${list.col }</p>
+			                    		<div style="width:5%; float:left;">
+			                    			<p>${list.id }</p>
 			                    		</div>
 			                    		<div style="width:10%; float:left;">
 			                    			<p>${list.name }</p>
@@ -42,13 +42,13 @@
 			                    		<div style="width:20%; float:left;">
 			                    			<p>${list.email }</p>
 			                    		</div>
-			                    		<div style="width:20%; float:left;">
+			                    		<div style="width:50%; float:left;">
 			                    			<p>${list.password }</p>
 			                    		</div>
-			                    		<div style="width:20%; float:left;">
+			                    		<div style="width:8%; float:left;">
 			                    			<button class="btn btn-primary" value="수정" onclick="location.href='modifyProduct?name=${list.name}'">수정</button>
 			                    		</div>
-			                    		<div style="width:20%; float:left;">
+			                    		<div style="width:7%; float:left;">
 			                    			<button class="btn btn-primary" value="삭제" onclick="location.href='deleteProduct?name=${list.name}'">삭제</button>
 			                    		</div>
 			                    	</div>

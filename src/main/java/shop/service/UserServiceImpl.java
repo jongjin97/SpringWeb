@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
         UserDomain userDomain = userRepository.findByEmail(email);
         List<GrantedAuthority> authorities = new ArrayList<>();
 
-        if("admin".equals(email))
+        if("kakao1302@naver.com".equals(email))
             authorities.add(new SimpleGrantedAuthority(Role.ADMIN.getValue()));
         else
             authorities.add(new SimpleGrantedAuthority(Role.MEMBER.getValue()));

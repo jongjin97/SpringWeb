@@ -25,7 +25,7 @@ public class CartController {
 	@Autowired
 	private ProductSelectService productSelectService;
 	
-	@RequestMapping(value ="/addCart", method = RequestMethod.POST)
+	@RequestMapping(value ="/myCart/addCart", method = RequestMethod.POST)
 	public String addCart(HttpServletResponse response, HttpServletRequest request, @ModelAttribute AddCart addCart, HttpSession session, Model model) {
 		boolean contain = false;
 		ProductDomain product = productSelectService.selectProduct(addCart.getName());
@@ -35,6 +35,7 @@ public class CartController {
 		} else {
 			list = new ArrayList<ProductDomain>();
 		}
+		System.out.println(list.size());
 		for(ProductDomain listproduct: list) {
 			if(listproduct.getName().equals(product.getName())) {
 				contain = true;
@@ -49,23 +50,36 @@ public class CartController {
 		return "ProductView";
 	}
 	
-	@RequestMapping(value ="/myCart", method = RequestMethod.GET)
+	@RequestMapping(value ="/myCart/list", method = RequestMethod.GET)
 	public String addCart(Model model, HttpSession session) {
-		List<Product> cartList = (List<Product>) session.getAttribute("cart");
+		List<ProductDomain> cartList;
+		if(session.getAttribute("cart") != null) {
+			cartList = (List<ProductDomain>) session.getAttribute("cart");
+		} else {
+			cartList = new ArrayList<ProductDomain>();
+		}
+		int sum = 0;
+		for(int i=0; i<cartList.size(); i++){
+			sum += cartList.get(i).getPrice();
+		}
 		model.addAttribute("cart", cartList);
-		
+		model.addAttribute("sum", sum);
 		return "myCart";
 	}
 	
-	@RequestMapping(value ="/delete", method = RequestMethod.POST)
+	@RequestMapping(value ="/myCart/delete", method = RequestMethod.POST)
 	public void deleteProduct(@RequestParam("name")String name ,Model model, HttpSession session) {
-		List<Product> list = (List<Product>) session.getAttribute("cart");
-		
-		for(Product product : list) {
+		List<ProductDomain> list = (List<ProductDomain>) session.getAttribute("cart");
+		int sum =0;
+		for(ProductDomain product : list) {
 			if(product.getName().equals(name)) {
 				list.remove(product);
+				continue;
 			}
+			sum += product.getPrice();
 		}
+		model.addAttribute("sum", sum);
 		session.setAttribute("cart", list);
+
 	}
 }

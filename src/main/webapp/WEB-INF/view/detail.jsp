@@ -23,7 +23,7 @@
 		<jsp:include page="../module/navigation.jsp"></jsp:include>
 		<div style="width:100%;  background-color: #F7F7F7;">
 	        <div class="container">
-	        	<form action="addCart" method="post" target="iframe1">
+	        	<form action="/myCart/addCart" method="post" target="iframe1">
 		            <div class="row">
 		                <!-- Blog entries-->
 		                <div class="col-lg-8">

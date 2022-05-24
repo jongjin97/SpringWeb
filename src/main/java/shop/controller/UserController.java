@@ -1,6 +1,5 @@
 package shop.controller;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,16 +10,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import shop.domain.UserDomain;
-import shop.dto.AuthInfo;
-import shop.dto.LoginUser;
-import shop.dto.Product;
 import shop.dto.RegisterRequest;
 import shop.dto.User;
 import shop.exception.DuplicateMemberException;
-import shop.exception.WrongIdPasswordException;
-import shop.service.LoginService;
-import shop.service.RegistService;
 import shop.service.UserService;
 
 
@@ -28,11 +20,9 @@ import shop.service.UserService;
 public class UserController {
 	@Autowired
 	private UserService userService;
-	@Autowired
-	private LoginService loginService;
+
 	
-	
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(value = "/user/login", method = RequestMethod.GET)
 	public String login(Model model) {
 		model.addAttribute("LoginUser", new User());
 		return "Login";
@@ -54,22 +44,18 @@ public class UserController {
 		}
 	}
 	*/
-	@RequestMapping(value = "/logout")
-	public String logout(HttpSession session) {
-		session.invalidate();
-		return "Main";
-	}
+
 	@RequestMapping(value = "/base")
 	public String base() {
 		return "base";
 	}
 	
-	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	@RequestMapping(value = "/user/register", method = RequestMethod.GET)
 	public String registerview(@ModelAttribute("registerRequest")RegisterRequest registerRequest) {
 		return "register";
 	}
 	
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	@RequestMapping(value = "/user/register", method = RequestMethod.POST)
 	public String registeruser(@ModelAttribute("registerRequest") RegisterRequest registerRequest, Errors errors) {
 		if(errors.hasErrors()) {
 			return "register";
@@ -78,7 +64,7 @@ public class UserController {
 		}
 		try {
 			userService.save(registerRequest);
-			return "redirect:/login";
+			return "redirect:/user/login";
 		} catch (DuplicateMemberException e) {
 			// TODO: handle exception
 			return "register";

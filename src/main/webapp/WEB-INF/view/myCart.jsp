@@ -1,5 +1,8 @@
+<%@ page import="shop.domain.ProductDomain" %>
+<%@ page import="java.util.List" %>
+<%@ page import="org.springframework.ui.Model" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+		 pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -26,7 +29,7 @@
 </head>
 <body>
 	<jsp:include page="../module/navigation.jsp"></jsp:include>
-	
+
 	<div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>
@@ -39,7 +42,7 @@
 	                    	<c:forEach var="cart" items="${cart }">
 		                    	<div style="width:70%; float:left;">
 		                    		<div style="width:10%; float:left;">
-		                    			<form action="delete?name=${cart.name }" method="post" target="iframe1" onclick="location.reload();">
+		                    			<form action="/myCart/delete?name=${cart.name }" method="post" target="iframe1" onclick="location.reload();">
 			                    		<input type="submit" value="삭제" >
 			                    		<iframe id="iframe1" name="iframe1" style="display:none"></iframe> 
 			                    		</form>
@@ -56,11 +59,6 @@
 										    <td>수량</td>
 										    <td class="bseq_ea">1</td>
 										    <hr>
-										    <td>
-										        <button type ="button" onclick="fnCalCount('p',this);">+</button>
-										        <input type="text" name="pop_out" value="0" readonly="readonly" style="text-align:center;"/>
-										        <button type="button" onclick="fnCalCount('m', this);">-</button>
-										    </td>
 										</tr>
 
 		                    		</div>
@@ -72,8 +70,9 @@
 	                    	<div style="width:30%; float:right;">
 	                    		<div>
 	                    			<p>주문 금액</p>
-	                    			<hr>
-	                    			<p>결제 예정 금액</p>
+
+									<fmt:formatNumber value="${sum}" pattern="#,###,###"></fmt:formatNumber>원
+
 	                    			<input type="button" value="주문하기">
 	                    		</div>
 	                    	</div>
@@ -83,22 +82,11 @@
             </div>
         </div>
 	
-	<jsp:include page="../module/footer.jsp"></jsp:include>
+
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 	<script src="js/scripts.js"></script>
 </body>
+
 <script type="text/javascript">
-function fnCalCount(type, ths){
-    var $input = $(ths).find("input[name='pop_out']");
-    var tCount = Number($input.val());
-    var tEqCount = Number($(ths).find("td.bseq_ea").html());
-    
-    if(type=='p'){
-        if(tCount < tEqCount) $input.val(Number(tCount)+1);
-        
-    }else{
-        if(tCount >0) $input.val(Number(tCount)-1);    
-        }
-}
 </script>
 </html>

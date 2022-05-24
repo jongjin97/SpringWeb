@@ -22,7 +22,7 @@
 <link href="./css/styles2.css" rel="stylesheet" />
 <link href="./css/styles.css" rel="stylesheet" />
 
-<script type="text/javascript" src="./ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
 <script> 
       var ckeditor_config = {
       resize_enaleb : false,
