@@ -20,12 +20,13 @@ import shop.exception.DuplicateMemberException;
 import shop.exception.WrongIdPasswordException;
 import shop.service.LoginService;
 import shop.service.RegistService;
+import shop.service.UserService;
 
 
 @Controller
 public class UserController {
 	@Autowired
-	private RegistService registService;
+	private UserService userService;
 	@Autowired
 	private LoginService loginService;
 	
@@ -73,7 +74,7 @@ public class UserController {
 			return "register";
 		}
 		try {
-			registService.registService(registerRequest);
+			userService.save(registerRequest);
 			return "redirect:/login";
 		} catch (DuplicateMemberException e) {
 			// TODO: handle exception

@@ -1,10 +1,13 @@
+<!--
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>   
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+-->
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -40,7 +43,7 @@
                         </li>
                         
                         <!-- manager -->
-                        <c:if test="${!empty authInfo}">
+
 	                        <li class="nav-item dropdown">
 	                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Manage</a>
 	                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -50,30 +53,32 @@
 	                                <li><a class="dropdown-item" href="manageUser">Manage User</a></li>
 	                            </ul>
 	                        </li>
-                        </c:if>
+
                         
                     </ul>
-                    <c:if test="${!empty authInfo}">
-                   		<a class="navbar-brand">${authInfo.name }</a>
+                    <sec:authorize access="isAuthenticated()">
+                   		<a class="navbar-brand" sec:authentication="name">님</a>
                    		<form class="d-flex">
 	                        <button class="btn btn-outline-dark" type="button" onclick="location.href='logout'">
 	                            Logout
 	                        </button>
                    		 </form>
-                  	</c:if>
+                    </sec:authorize>
+
                   	
-                  	<c:if test="${empty authInfo }">
+                    <sec:authorize access="isAnonymous()">
 	                  	<form class="d-flex">
 	                        <button class="btn btn-outline-dark" type="button" onclick="location.href='login'">
 	                            Login
 	                        </button>
 	                    </form>
+                    </sec:authorize>
 	                    <form class="d-flex">
 	                        <button class="btn btn-outline-dark" type="button" onclick="location.href='register'">
 	                            Regist
 	                        </button>
 	                    </form>
-                  	</c:if>
+
                     <form class="d-flex">
                         <button class="btn btn-outline-dark" type="button" onclick="location.href='myCart'">
                             <i class="bi-cart-fill me-1"></i>

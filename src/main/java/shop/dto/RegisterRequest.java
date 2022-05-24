@@ -1,6 +1,7 @@
 package shop.dto;
 
 
+import shop.domain.UserDomain;
 
 public class RegisterRequest{
 
@@ -34,5 +35,11 @@ public class RegisterRequest{
 		this.confirm = confirm;
 	}
 	
-	
+	public UserDomain toEntity(){
+		return UserDomain.builder()
+				.name(name)
+				.email(email)
+				.password(password)
+				.build();
+	}
 }
