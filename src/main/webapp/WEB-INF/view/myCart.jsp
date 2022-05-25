@@ -42,7 +42,7 @@
 	                    	<c:forEach var="cart" items="${cart }">
 		                    	<div style="width:70%; float:left;">
 		                    		<div style="width:10%; float:left;">
-		                    			<form action="/myCart/delete?name=${cart.name }" method="post" target="iframe1" onclick="location.reload();">
+		                    			<form action="/myCart/delete?name=${cart.name }" method="post" <%--target="iframe1"--%> onclick="location.reload();">
 			                    		<input type="submit" value="삭제" >
 			                    		<iframe id="iframe1" name="iframe1" style="display:none"></iframe> 
 			                    		</form>
@@ -67,15 +67,19 @@
 		                    		</div>
 		                    	</div>
 	                    	</c:forEach>
-	                    	<div style="width:30%; float:right;">
-	                    		<div>
-	                    			<p>주문 금액</p>
-
-									<fmt:formatNumber value="${sum}" pattern="#,###,###"></fmt:formatNumber>원
-
-	                    			<input type="button" value="주문하기">
-	                    		</div>
-	                    	</div>
+							<form action="/order/product" method="post">
+								<div style="width:30%; float:right;">
+									<div>
+										<c:if test="${sum > 0}">
+										<p>주문 금액</p>
+										<br/>
+										<fmt:formatNumber value="${sum}" pattern="#,###,###"></fmt:formatNumber>원
+											<br/>
+										<input type="submit" value="주문하기">
+										</c:if>
+									</div>
+								</div>
+							</form>
                     	</div>
                     </div>
                 </main>

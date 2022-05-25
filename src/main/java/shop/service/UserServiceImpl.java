@@ -25,7 +25,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws EmailNotFoundException{
-        System.out.println("email = " + email);
         UserDomain userDomain = userRepository.findByEmail(email);
         List<GrantedAuthority> authorities = new ArrayList<>();
 

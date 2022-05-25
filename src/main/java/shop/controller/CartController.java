@@ -68,18 +68,22 @@ public class CartController {
 	}
 	
 	@RequestMapping(value ="/myCart/delete", method = RequestMethod.POST)
-	public void deleteProduct(@RequestParam("name")String name ,Model model, HttpSession session) {
+	public String deleteProduct(@RequestParam("name")String name ,Model model, HttpSession session) {
 		List<ProductDomain> list = (List<ProductDomain>) session.getAttribute("cart");
 		int sum =0;
-		for(ProductDomain product : list) {
-			if(product.getName().equals(name)) {
-				list.remove(product);
-				continue;
+		System.out.println("listsize = "+list.size());
+		if(list != null) {
+			for (int i=0; i<list.size(); i++) {
+				ProductDomain product = list.get(i);
+				if (product.getName().equals(name)) {
+					list.remove(product);
+					continue;
+				}
+				sum += product.getPrice();
 			}
-			sum += product.getPrice();
 		}
 		model.addAttribute("sum", sum);
 		session.setAttribute("cart", list);
-
+		return "redirect:/myCart/list";
 	}
 }
