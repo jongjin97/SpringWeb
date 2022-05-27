@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import shop.domain.UserDomain;
 import shop.dto.RegisterRequest;
+import shop.exception.DuplicateMemberException;
 import shop.exception.EmailNotFoundException;
 import shop.jpa.UserRepository;
 import shop.service.UserService;
@@ -43,6 +44,8 @@ public class UserServiceImpl implements UserService {
     public String save(RegisterRequest registerRequest) {
         UserDomain userDomain = registerRequest.toEntity();
 
+        UserDomain user = userRepository.findByEmail(registerRequest.getEmail());
+        if(user != null) throw new DuplicateMemberException("아이디 중복");
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         userDomain.setPassword(passwordEncoder.encode(userDomain.getPassword()));
 
