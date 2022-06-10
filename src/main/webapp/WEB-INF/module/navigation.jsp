@@ -55,10 +55,11 @@
 	                        </li>
                         </sec:authorize>
 
-                        
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/chat" id="go-chat">Chat</a></li>
                     </ul>
                     <sec:authorize access="isAuthenticated()">
                    		<a class="navbar-brand"><sec:authentication property="principal.username"/>님</a>
+                        <input type="hidden" id="login-user" value= <sec:authentication property="principal.username" /> />
                    		<form class="d-flex">
 	                        <button class="btn btn-outline-dark" type="button" onclick="location.href='/user/logout'">
 	                            Logout

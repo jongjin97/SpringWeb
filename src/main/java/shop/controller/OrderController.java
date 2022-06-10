@@ -26,6 +26,7 @@ public class OrderController {
 
     @PostMapping("/order/product")
     public String OrderProduct(HttpSession session, Principal principal){
+
         List<ProductDomain> list = (List<ProductDomain>) session.getAttribute("cart");
         UserDomain userDomain = userRepository.findByEmail(principal.getName());
 

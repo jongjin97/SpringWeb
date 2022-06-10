@@ -44,7 +44,7 @@
 			                    			<fmt:formatNumber value="${list.price }" pattern="#,###,###"></fmt:formatNumber>원
 			                    		</div>
 			                    		<div style="width:20%; float:left;">
-			                    			<button class="btn btn-primary" value="수정" onclick="location.href='modifyProduct?name=${list.name}'">수정</button>
+			                    			<button class="btn btn-primary" value="수정" onclick="location.href='/manage/modifyProduct?name=${list.name}'">수정</button>
 			                    		</div>
 			                    		<div style="width:20%; float:left;">
 			                    			<button class="btn btn-primary" value="삭제" onclick="location.href='deleteProduct?name=${list.name}'">삭제</button>

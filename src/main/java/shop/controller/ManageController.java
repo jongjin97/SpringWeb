@@ -15,11 +15,7 @@ import shop.domain.ProductDomain;
 import shop.domain.UserDomain;
 import shop.dto.Product;
 import shop.dto.User;
-import shop.service.AllProductSelectService;
-import shop.service.DeleteProductService;
-import shop.service.ModifyProduct;
-import shop.service.ProductSelectService;
-import shop.service.SelectAllUser;
+import shop.service.*;
 
 @Controller
 public class ManageController {
@@ -33,6 +29,8 @@ public class ManageController {
 	private DeleteProductService deleteProductService;
 	@Autowired
 	private SelectAllUser selectAllUser;
+	@Autowired
+	private ProductService productService;
 
 
 	@RequestMapping("manage/manageProduct")
@@ -54,13 +52,13 @@ public class ManageController {
 	@RequestMapping(value="modifyProduct", method = RequestMethod.POST)
 	public String modifyProduct(@ModelAttribute("product")Product product, @RequestParam("name")String name) {
 		modifyProduct.modifyProduct(product, name);
-		return "redirect:/manageProduct"; 
+		return "redirect:/manage/manageProduct";
 	}
 	
 	@RequestMapping(value ="manage/deleteProduct")
 	public String deleteProduct(@RequestParam("name")String name) {
-		deleteProductService.deleteProduct(name);
-		return "redirect:/manageProduct";
+		productService.remove(name);
+		return "redirect:/manage/manageProduct";
 	}
 	
 	@RequestMapping(value="manage/manageUser", method=RequestMethod.GET)

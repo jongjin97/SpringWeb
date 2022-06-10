@@ -10,4 +10,5 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<ProductDomain, Long> {
     public List<ProductDomain> findAllByCategory(String category);
     public ProductDomain findByName(String name);
+    public void removeByName(String name);
 }
