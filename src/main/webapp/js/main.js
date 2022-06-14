@@ -13,6 +13,7 @@ var colors = [
     '#ffc107', '#ff85af', '#FF9800', '#39bbb0'
 ];
 
+//채팅 시작 버튼 누를 때
 function connect(event) {
     if(stompClient == null){
         username = document.querySelector('#login-user').value.trim();
@@ -50,7 +51,7 @@ function onError(error) {
     connectingElement.style.color = 'red';
 }
 
-
+//메시지 보낼때
 function sendMessage(event) {
     var messageContent = messageInput.value.trim();
     if(messageContent && stompClient) {
@@ -65,7 +66,7 @@ function sendMessage(event) {
     event.preventDefault();
 }
 
-
+// view
 function onMessageReceived(payload) {
     var message = JSON.parse(payload.body);
 
