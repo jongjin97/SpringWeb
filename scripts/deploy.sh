@@ -1,7 +1,7 @@
 #!/bin/bash
 
 REPOSITORY=/home/ec2-user/app
-PROJECT_NAME=springboot-service
+PROJECT_NAME=SpringWeb
 
 echo "> Build 파일 복사"
 cp $REPOSITORY/zip/*.war $REPOSITORY/
