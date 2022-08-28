@@ -1,4 +1,4 @@
-package shop.domain;
+package shop.entity;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -22,12 +22,12 @@ public class UserDomain {
     private String name;
     private String password;
 
-    @Builder
-    public UserDomain(String email, String name, String password){
-        this.email = email;
-        this.name = name;
-        this.password = password;
-    }
+//    @Builder
+//    public UserDomain(String email, String name, String password){
+//        this.email = email;
+//        this.name = name;
+//        this.password = password;
+//    }
 
 
 }

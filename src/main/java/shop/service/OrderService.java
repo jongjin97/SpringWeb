@@ -1,7 +1,7 @@
 package shop.service;
 
-import shop.domain.OrderDomain;
-import shop.dto.Order;
+import shop.entity.OrderDomain;
+import shop.entity.ProductDomain;
 
 import java.util.List;
 

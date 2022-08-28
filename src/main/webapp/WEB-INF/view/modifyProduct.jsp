@@ -54,19 +54,15 @@
                                             </div>
                                             <div class="form-floating mb-3">
                                                 <form:select class="form-control" name="Device" value="catgory" path="category">
-												  <option value="SmartPhone">SmartPhone</option>
-												  <option value="Tablet">Tablet</option>
-												  <option value="Watch">Watch</option>
-												  <option value="Buz">Buz</option>
-												  <option value="GalaxyBook">GalaxyBook</option>
-												</form:select>
+                                                    <option value="top">TOP</option>
+                                                    <option value="pants">PANTS</option>
+                                                    <option value="outer">OUTER</option>
+                                                    <option value="shoes">SHOES</option>
+                                                </form:select>
 												<label for="inputEmail">Category</label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input type="file" name="file"></input>
-                                            </div>
-                                            <div class="form-floating mb-3">
-                                                <form:textarea id="content" name="content" rows="40" path="content"></form:textarea>
+                                                <form:textarea id="content" name="content" rows="10" path="content"></form:textarea>
                                                  <script>
                                                  CKEDITOR.replace( 'content', {
                                                 	 filebrowserImageUploadUrl: '${pageContext.request.contextPath}/fileupload'

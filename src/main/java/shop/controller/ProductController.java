@@ -24,30 +24,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import shop.domain.ProductDomain;
+import shop.dto.Cart;
 import shop.dto.Product;
-import shop.service.AddProductService;
-import shop.service.ProductListService;
-import shop.service.ProductSelectService;
+import shop.service.ProductService;
 
 @Controller
 public class ProductController {
 
 	@Autowired
-	private AddProductService addProductService;
-	@Autowired
-	private ProductListService productListService;
-	@Autowired
-	private ProductSelectService productSelectService;
+	private ProductService productService;
 	
-	
-	@RequestMapping(value="/manage/addProduct", method = RequestMethod.GET)
+	@RequestMapping(value="/product/addProduct", method = RequestMethod.GET)
 	public String addProductView(@ModelAttribute("product") Product product) {
 
 		return "addProduct";
 	}
 	
-	@RequestMapping(value="/manage/addProduct", method=RequestMethod.POST)
+	@RequestMapping(value="/product/addProduct", method=RequestMethod.POST)
 	public String addProduct(HttpServletRequest req, HttpServletResponse response, MultipartFile file, @ModelAttribute("product")Product product)
 			throws IOException {
 		String originalName = file.getOriginalFilename();
@@ -74,9 +67,8 @@ public class ProductController {
 				out.close();
 			}
 		}
-		addProductService.insert(product);
-		
-		
+
+		productService.save(product);
 		
 		return "redirect:/main";
 	}
@@ -134,8 +126,8 @@ public class ProductController {
 	}
 
 	@RequestMapping(value="/product/ProductView", method=RequestMethod.GET)
-	public String ProductView(@RequestParam("device") String device, Model model) {
-		List<ProductDomain> list = productListService.productList(device);
+	public String ProductView(@RequestParam("category") String category, Model model) {
+		List<Product> list = productService.findByCategory(category);
 
 		model.addAttribute("list", list);
 		return "ProductView";
@@ -143,8 +135,7 @@ public class ProductController {
 	
 	@RequestMapping(value="/product/detail", method=RequestMethod.GET)
 	public String ProductDetail(@RequestParam("name") String name, Model model) {
-		System.out.println(name);
-		ProductDomain product= productSelectService.selectProduct(name);
+		Product product= productService.findByProductName(name);
 		model.addAttribute("product", product);
 		return "detail";
 	}

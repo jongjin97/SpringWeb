@@ -2,9 +2,6 @@ package shop.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import shop.domain.OrderDomain;
-
-import javax.persistence.GeneratedValue;
 
 @Getter
 @NoArgsConstructor

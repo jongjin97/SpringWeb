@@ -1,47 +1,32 @@
 package shop.dto;
 
 
+import com.sun.istack.NotNull;
 import lombok.Builder;
+
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import shop.domain.UserDomain;
+import shop.entity.UserDomain;
 
-@Getter
+@Data
 @NoArgsConstructor
 public class RegisterRequest{
-
+	@NotNull
 	private String name;
+	@NotNull
 	private String email;
+	@NotNull
 	private String password;
+	@NotNull
 	private String confirm;
 
-
-	public void setName(String name) {
-		this.name = name;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public void setConfirm(String confirm) {
-		this.confirm = confirm;
-	}
 	
-	public UserDomain toEntity(){
-		return UserDomain.builder()
-				.name(name)
-				.email(email)
-				.password(password)
-				.build();
-	}
-
-	@Builder
-	public RegisterRequest(String name, String email, String password, String confirm){
-		this.name = name;
-		this.email = email;
-		this.password = password;
-		this.confirm = confirm;
-	}
+//	public UserDomain toEntity(){
+//		return UserDomain.builder()
+//				.name(name)
+//				.email(email)
+//				.password(password)
+//				.build();
+//	}
 }

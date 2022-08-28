@@ -1,4 +1,4 @@
-<%@ page import="shop.domain.ProductDomain" %>
+<%@ page import="shop.entity.ProductDomain" %>
 <%@ page import="java.util.List" %>
 <%@ page import="org.springframework.ui.Model" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -50,14 +50,11 @@
 		                    		<div style="width:20%; float:left;"><img class="card-img-top" src="<c:out value="${cart.file_path }"/>" alt="..." /></div>
 		                    		<div style="width:30%; float:left;">
 		                    			<p>${cart.name }</p>
-		                    			<p>모델명</p>
-		                    			
-		                    			<p>색상/메모리</p>
 		                    		</div>
 		                    		<div style="width:20%; float:left;">
 		                    			<tr style="text-align:center;">
 										    <td>수량</td>
-										    <td class="bseq_ea">1</td>
+										    <td class="bseq_ea"></td>
 										    <hr>
 										</tr>
 

@@ -23,17 +23,19 @@
 		<jsp:include page="../module/navigation.jsp"></jsp:include>
 		<div style="width:100%;  background-color: #F7F7F7;">
 	        <div class="container">
-	        	<form action="/myCart/addCart" method="post" target="iframe1">
+	        	<form:form action="/cart/addCart" method="post" target="iframe1" modelAttribute="product">
 		            <div class="row">
 		                <!-- Blog entries-->
 		                <div class="col-lg-8">
 		                    <!-- Featured blog post-->
 		                    <div class="card mb-4">
-		                        <a href="#!"><img class="card-img-top" src="${product.file_path }" alt="..." /></a>
+								<div style="width:50%" style="height: 50%">
+										<a href="#!"><img class="card-img-top" src="${product.file_path }" alt="..." /></a>
+								</div>
 		                    </div>
 		                </div>
 		                <!-- Side widgets-->
-		                <div class="col-lg-4"">
+		                <div class="col-lg-4">
 		                    <!-- Search widget-->
 		                    <div class="card mb-4">
 		                        <div class="card-body">
@@ -41,26 +43,26 @@
 		                            </div>
 		                            <div class="input-group">
 		                                <h1>${product.name }</h1>
-		                                <input type="hidden" id="name" name="name" value="${product.name }"/>
-		                            </div>
-		                            <div class="input-group">
-		                                <p>모델명</p>
+										<form:input path="id" type="hidden" value="${product.id}"/>
+										<form:input path="category" type="hidden" value="${product.category}"/>
+		                                <form:input path="name" type="hidden" value="${product.name}"/>
+										<form:input path="price" type="hidden" value="${product.price}"/>
 		                            </div>
 		                            <div class="form-floating mb-3">
 		                                <p>판매가  <fmt:formatNumber value="${product.price }" pattern="#,###,###"></fmt:formatNumber>원</p>
 		                            </div>
+									<div class="form-floating mb-3">
+										<p>재고 ${product.qty}</p>
+									</div>
 		                            <div class="form-floating mb-3">
-		                                <p>색상 </p>
-		                            </div>
-		                            <div class="form-floating mb-3">
-		                                <p>메모리</p>
-		                            </div>
-		                            <div class="form-floating mb-3">
-		                                <p>수량</p>
-		                            </div>
+<											<form:input path="qty" class="form-control" id="qty" type="number" min="0" max="${product.qty}" value="0"/>
+<%--										<input class="form-control" id="qty" type="number" min="0" max="${product.qty}" value="0"/>--%>
+										<label for="inputFirstName">수량</label>
+									</div>
 		                            <hr>
 		                            <div class="form-floating mb-3">
 		                                <h1>판매가</h1><fmt:formatNumber value="${product.price }" pattern="#,###,###"></fmt:formatNumber>원
+
 		                            </div>
 		                            <hr>
 		                            <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
@@ -77,7 +79,7 @@
 		                    </div>
 		                </div>
 		            </div>
-	            </form>
+	            </form:form>
 	            <div class="row">
 	                <!-- Blog entries-->
 	                <div class="col-lg-16">

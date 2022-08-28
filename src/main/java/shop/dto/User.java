@@ -4,13 +4,13 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import shop.domain.UserDomain;
+import shop.entity.UserDomain;
 
 @Getter
 @Setter
 @NoArgsConstructor
 public class User {
-
+	private long id;
 	private String name;
 	private String email;
 	private String password;
@@ -22,13 +22,4 @@ public class User {
 		this.password = password;
 	}
 
-	public UserDomain toEntity(){
-		return UserDomain.builder()
-				.name(name)
-				.password(password)
-				.email(email)
-				.build();
-	}
-
-	
 }

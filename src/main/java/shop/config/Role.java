@@ -1,4 +1,4 @@
-package shop.service;
+package shop.config;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

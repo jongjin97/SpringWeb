@@ -33,12 +33,11 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/product/ProductView?device=SmartPhone">Smart Phone</a></li>
+                                <li><a class="dropdown-item" href="/product/ProductView?category=top">TOP</a></li>
                                 <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="/product/ProductView?device=Tablet">Tablet</a></li>
-                                <li><a class="dropdown-item" href="/product/ProductView?device=Watch">Watch</a></li>
-                                <li><a class="dropdown-item" href="/product/ProductView?device=Buz">Buz</a></li>
-                                <li><a class="dropdown-item" href="/product/ProductView?device=GalaxyBook">Galaxy Book</a></li>
+                                <li><a class="dropdown-item" href="/product/ProductView?category=pants">PANTS</a></li>
+                                <li><a class="dropdown-item" href="/product/ProductView?category=Watch">OUTER</a></li>
+                                <li><a class="dropdown-item" href="/product/ProductView?category=Buz">SHOES</a></li>
                             </ul>
                         </li>
                         
@@ -47,15 +46,13 @@
 	                        <li class="nav-item dropdown">
 	                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Manage</a>
 	                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-	                                <li><a class="dropdown-item" href="/manage/addProduct">Add Products</a></li>
+	                                <li><a class="dropdown-item" href="/product/addProduct">Add Products</a></li>
 	                                <li><hr class="dropdown-divider" /></li>
 	                                <li><a class="dropdown-item" href="/manage/manageProduct">Manage Products</a></li>
 	                                <li><a class="dropdown-item" href="/manage/manageUser">Manage User</a></li>
 	                            </ul>
 	                        </li>
                         </sec:authorize>
-
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/chat" id="go-chat">Chat</a></li>
                     </ul>
                     <sec:authorize access="isAuthenticated()">
                    		<a class="navbar-brand"><sec:authentication property="principal.username"/>님</a>
@@ -81,7 +78,7 @@
 	                    </form>
                     </sec:authorize>
                     <form class="d-flex">
-                        <button class="btn btn-outline-dark" type="button" onclick="location.href='/myCart/list'">
+                        <button class="btn btn-outline-dark" type="button" onclick="location.href='/cart/list'">
                             <i class="bi-cart-fill me-1"></i>
                             Cart
                             <span class="badge bg-dark text-white ms-1 rounded-pill">${cart.size() }</span>

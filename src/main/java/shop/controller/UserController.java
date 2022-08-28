@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -45,18 +46,13 @@ public class UserController {
 	}
 	*/
 
-	@RequestMapping(value = "/base")
-	public String base() {
-		return "base";
-	}
-	
 	@RequestMapping(value = "/user/register", method = RequestMethod.GET)
 	public String registerview(@ModelAttribute("registerRequest")RegisterRequest registerRequest) {
 		return "register";
 	}
 	
 	@RequestMapping(value = "/user/register", method = RequestMethod.POST)
-	public String registeruser(@ModelAttribute("registerRequest") RegisterRequest registerRequest, Errors errors) {
+	public String registeruser(@Validated @ModelAttribute("registerRequest") RegisterRequest registerRequest, Errors errors) {
 		if(errors.hasErrors()) {
 			return "register";
 		} else if(!registerRequest.getPassword().equals(registerRequest.getConfirm())) {

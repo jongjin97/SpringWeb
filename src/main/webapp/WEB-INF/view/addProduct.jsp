@@ -53,12 +53,15 @@
                                                 <label for="inputEmail">Price</label>
                                             </div>
                                             <div class="form-floating mb-3">
+                                                <form:input class="form-control" type="number" path="qty"/>
+                                                <label for="inputEmail">Qty</label>
+                                            </div>
+                                            <div class="form-floating mb-3">
                                                 <form:select class="form-control" name="Device" value="catgory" path="category">
-												  <option value="SmartPhone">SmartPhone</option>
-												  <option value="Tablet">Tablet</option>
-												  <option value="Watch">Watch</option>
-												  <option value="Buz">Buz</option>
-												  <option value="GalaxyBook">GalaxyBook</option>
+												  <option value="top">TOP</option>
+												  <option value="pants">PANTS</option>
+												  <option value="outer">OUTER</option>
+												  <option value="shoes">SHOES</option>
 												</form:select>
 												<label for="inputEmail">Category</label>
                                             </div>

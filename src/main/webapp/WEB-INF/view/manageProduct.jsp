@@ -37,8 +37,6 @@
 			                    		<div style="width:20%; float:left;"><img class="card-img-top" src="<c:out value="${list.file_path }"/>" alt="..." /></div>
 			                    		<div style="width:20%; float:left;">
 			                    			<p>${list.name }</p>
-			                    			<p>모델명</p>
-			                    			<p>색상/메모리</p>
 			                    		</div>
 			                    		<div style="width:20%; float:left;">
 			                    			<fmt:formatNumber value="${list.price }" pattern="#,###,###"></fmt:formatNumber>원
