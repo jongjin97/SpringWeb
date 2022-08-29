@@ -10,6 +10,9 @@ import shop.entity.CartDomain;
 import shop.jpa.CartRepository;
 import shop.service.CartService;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class CartServiceImpl implements CartService {
     @Autowired
@@ -20,7 +23,21 @@ public class CartServiceImpl implements CartService {
         Cart cart = new Cart(product, user);
         ModelMapper modelMapper = new ModelMapper();
         CartDomain cartDomain = modelMapper.map(cart, CartDomain.class);
-        System.out.println(cartDomain.getProductCategory());
         cartRepository.save(cartDomain);
+    }
+
+    @Override
+    public List<Cart> getList(String email) {
+        List<CartDomain> cartDomains = cartRepository.findByUserEmail(email);
+        ModelMapper modelMapper = new ModelMapper();
+        List<Cart> list = cartDomains.stream().map(
+                cartDomain -> modelMapper.map(cartDomain, Cart.class)).collect(Collectors.toList());
+
+        return list;
+    }
+
+    @Override
+    public void delete(long id) {
+        cartRepository.deleteById(id);
     }
 }

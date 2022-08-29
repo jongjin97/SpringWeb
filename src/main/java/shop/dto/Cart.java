@@ -18,6 +18,7 @@ public class Cart {
     private int product_Price;
     private int totalPrice;
     private String productCategory;
+    private String filePath;
 
 
     public Cart(Product product, User user){
@@ -30,6 +31,7 @@ public class Cart {
         this.productName = product.getName();
         this.productQty = product.getQty();
         this.totalPrice = product.getQty() * product.getPrice();
+        this.filePath = product.getFile_path();
     }
 
     public void size(){}

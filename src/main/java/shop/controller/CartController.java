@@ -4,14 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import shop.dto.Cart;
 import shop.dto.Product;
 import shop.dto.User;
 import shop.service.CartService;
 import shop.service.UserService;
+
+import java.util.List;
 
 @Controller
 public class CartController {
@@ -22,9 +23,11 @@ public class CartController {
     private UserService userService;
 
     @GetMapping(value = "cart/list")
-    public String cartView(){
-        //UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public String cartView(Model model){
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
+        List<Cart> list = cartService.getList(userDetails.getUsername());
+        model.addAttribute("cart", list);
         return "myCart";
     }
 
@@ -35,5 +38,12 @@ public class CartController {
         User user = userService.findByEmail(userDetails.getUsername());
 
         cartService.save(product, user);
+    }
+
+    @PostMapping(value = "cart/{id}")
+    public String deleteCart(@PathVariable(name = "id")String id){
+        long cartId = Long.parseLong(id);
+        cartService.delete(cartId);
+        return "redirect:/cart/list";
     }
 }

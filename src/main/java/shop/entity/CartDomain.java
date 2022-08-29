@@ -31,5 +31,6 @@ public class CartDomain {
     private int product_Price;
     @Column(name = "total_price")
     private int totalPrice;
-
+    @Column(name = "file_path")
+    private String filePath;
 }

@@ -47,6 +47,7 @@
 										<form:input path="category" type="hidden" value="${product.category}"/>
 		                                <form:input path="name" type="hidden" value="${product.name}"/>
 										<form:input path="price" type="hidden" value="${product.price}"/>
+										<form:input path="file_path" type="hidden" value="${product.file_path}"/>
 		                            </div>
 		                            <div class="form-floating mb-3">
 		                                <p>판매가  <fmt:formatNumber value="${product.price }" pattern="#,###,###"></fmt:formatNumber>원</p>

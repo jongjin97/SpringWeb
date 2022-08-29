@@ -42,14 +42,14 @@
 	                    	<c:forEach var="cart" items="${cart }">
 		                    	<div style="width:70%; float:left;">
 		                    		<div style="width:10%; float:left;">
-		                    			<form action="/myCart/delete?name=${cart.name }" method="post" <%--target="iframe1"--%> onclick="location.reload();">
+		                    			<form action="/cart/${cart.id }" method="post" onclick="window.location.reload();">
 			                    		<input type="submit" value="삭제" >
 			                    		<iframe id="iframe1" name="iframe1" style="display:none"></iframe> 
 			                    		</form>
 		                    		</div>
-		                    		<div style="width:20%; float:left;"><img class="card-img-top" src="<c:out value="${cart.file_path }"/>" alt="..." /></div>
+		                    		<div style="width:20%; float:left;"><img class="card-img-top" src="<c:out value="${cart.filePath }"/>" alt="..." /></div>
 		                    		<div style="width:30%; float:left;">
-		                    			<p>${cart.name }</p>
+		                    			<p>${cart.productName }</p>
 		                    		</div>
 		                    		<div style="width:20%; float:left;">
 		                    			<tr style="text-align:center;">
@@ -60,7 +60,7 @@
 
 		                    		</div>
 		                    		<div style="width:20%; float:left;">
-		                    			<fmt:formatNumber value="${cart.price }" pattern="#,###,###"></fmt:formatNumber>원
+		                    			<fmt:formatNumber value="${cart.product_Price }" pattern="#,###,###"></fmt:formatNumber>원
 		                    		</div>
 		                    	</div>
 	                    	</c:forEach>
