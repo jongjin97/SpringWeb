@@ -10,6 +10,7 @@ public class Order {
     private String productName;
     private String productPrice;
     private String productCategory;
+    private int productQty;
     private String productFile_name;
     private String productFile_path;
     private String userName;

@@ -67,7 +67,7 @@
 		                            </div>
 		                            <hr>
 		                            <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-		                                <input class="btn btn-primary" type="submit" value="장바구니" onclick="location.reload();"></a>
+		                                <input class="btn btn-primary" id="addCart" type="submit" value="장바구니" onclick="x()"></a>
 		                                <c:if test="${!empty authInfo}">
 		                                	<a><input class="btn btn-primary" type="submit" value="바로구매" ></a>
 		                                </c:if>
@@ -103,4 +103,14 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
 </body>
+<script>
+	const addCartBtn = document.getElementById("addCart");
+	const Qty = document.getElementById("qty").valueOf();
+	function x( ) {
+		console.log(Qty)
+		if(Qty <= 0){
+			alert("주문 수량이 1개 미만입니다.")
+		}
+	}
+</script>
 </html>

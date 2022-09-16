@@ -7,5 +7,5 @@ import shop.entity.ProductDomain;
 
 @Repository
 public interface OrderRepository extends JpaRepository<OrderDomain, Long> {
-    ProductDomain findByProductname(String name);
+
 }

@@ -5,6 +5,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import shop.dto.Cart;
 import shop.dto.Product;
@@ -32,7 +33,7 @@ public class CartController {
     }
 
     @PostMapping(value = "cart/addCart")
-    public void addCart(@ModelAttribute("product")Product product){
+    public void addCart(@Validated @ModelAttribute("product")Product product){
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         User user = userService.findByEmail(userDetails.getUsername());

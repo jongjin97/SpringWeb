@@ -34,50 +34,112 @@
             <div id="layoutAuthentication_content">
                 <main>
                     <div>
-                    	<div>
-                    		<h1>My Cart</h1>
-                    		<br>
-                    	</div>
-	                    <div>
-	                    	<c:forEach var="cart" items="${cart }">
-		                    	<div style="width:70%; float:left;">
-		                    		<div style="width:10%; float:left;">
-		                    			<form action="/cart/${cart.id }" method="post" onclick="window.location.reload();">
-			                    		<input type="submit" value="삭제" >
-			                    		<iframe id="iframe1" name="iframe1" style="display:none"></iframe> 
-			                    		</form>
-		                    		</div>
-		                    		<div style="width:20%; float:left;"><img class="card-img-top" src="<c:out value="${cart.filePath }"/>" alt="..." /></div>
-		                    		<div style="width:30%; float:left;">
-		                    			<p>${cart.productName }</p>
-		                    		</div>
-		                    		<div style="width:20%; float:left;">
-		                    			<tr style="text-align:center;">
-										    <td>수량</td>
-										    <td class="bseq_ea"></td>
-										    <hr>
+						<div style="margin: 10%">
+							<div style="text-align: center">
+								<h1>Cart</h1>
+							</div>
+							<div>
+								<table style="border-top: 1px solid #444444">
+									<thead>
+									<tr style="border-bottom: 1px solid #444444">
+										<th scope="col" style="padding: 10px" width="10%"><p style="text-align: center">이미지</p></th>
+										<th scope="col" style="padding: 10px" width="20%"><p style="text-align: center">이름</p></th>
+										<th scope="col" style="padding: 10px" width="20%"><p style="text-align: center">판매가</p></th>
+										<th scope="col" style="padding: 10px" width="20%"><p style="text-align: center">수량</p></th>
+										<th scope="col" style="padding: 10px" width="20%"><p style="text-align: center">합계</p></th>
+										<th scope="col" style="padding: 10px" width="10%"><p style="text-align: center">버튼</p></th>
+									</tr>
+									</thead>
+									<tbody>
+									<c:set var="total" value="0"/>
+									<c:forEach var="cart" items="${cart }">
+										<c:set var="total" value="${total + cart.product_Price * cart.productQty}"/>
+										<tr style="border-bottom: 1px solid #444444">
+											<td style="padding: 10px">
+												<img class="card-img-top" src="<c:out value="${cart.filePath }"/>" alt="..." />
+											</td>
+											<td style="padding: 10px">
+												<p style="text-align: center">${cart.productName }</p>
+											</td>
+											<td style="padding: 10px">
+												<p style="text-align: center">\<fmt:formatNumber value="${cart.product_Price }" pattern="#,###,###"></fmt:formatNumber>원</p>
+											</td>
+											<td style="padding: 10px">
+												<p style="text-align: center">${cart.productQty }</p>
+											</td>
+											<td style="padding: 10px">
+												<p style="text-align: center">\<fmt:formatNumber value="${cart.productQty * cart.product_Price}" pattern="#,###,###"></fmt:formatNumber>원</p>
+											</td>
+											<td style="text-align: center">
+												<form method="post" action="/cart/${cart.id}">
+													<button style="display: inline-block" type="submit">삭제</button>
+												</form>
+											</td>
 										</tr>
-
-		                    		</div>
-		                    		<div style="width:20%; float:left;">
-		                    			<fmt:formatNumber value="${cart.product_Price }" pattern="#,###,###"></fmt:formatNumber>원
-		                    		</div>
-		                    	</div>
-	                    	</c:forEach>
-							<form action="/order/product" method="post">
-								<div style="width:30%; float:right;">
-									<div>
-										<c:if test="${sum > 0}">
-										<p>주문 금액</p>
-										<br/>
-										<fmt:formatNumber value="${sum}" pattern="#,###,###"></fmt:formatNumber>원
-											<br/>
-										<input type="submit" value="주문하기">
-										</c:if>
-									</div>
-								</div>
+									</c:forEach>
+									</tbody>
+								</table>
+							</div>
+							<div style="width: 100%" margin-top="10px">
+								<table style="border-top: 1px solid #444444">
+									<thead>
+										<tr style="border-bottom: 1px solid #444444">
+											<th scope="col"><strong>총 상품금액</strong></th>
+											<th scope="col"><strong>결제예정금액</strong></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr style="border-bottom: 1px solid #444444">
+											<th scope="col">${total}</th>
+											<th scope="col">${total}</th>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<form action="/order" method="post">
+								<button type="submit" value="구매">구매</button>
 							</form>
-                    	</div>
+						</div>
+<%--	                    <div>--%>
+<%--	                    	<c:forEach var="cart" items="${cart }">--%>
+<%--		                    	<div style="width:70%; float:left;">--%>
+<%--		                    		<div style="width:10%; float:left;">--%>
+<%--		                    			<form action="/cart/${cart.id }" method="post" onclick="window.location.reload();">--%>
+<%--			                    		<input type="submit" value="삭제" >--%>
+<%--			                    		<iframe id="iframe1" name="iframe1" style="display:none"></iframe> --%>
+<%--			                    		</form>--%>
+<%--		                    		</div>--%>
+<%--		                    		<div style="width:20%; float:left;"><img class="card-img-top" src="<c:out value="${cart.filePath }"/>" alt="..." /></div>--%>
+<%--		                    		<div style="width:30%; float:left;">--%>
+<%--		                    			<p>${cart.productName }</p>--%>
+<%--		                    		</div>--%>
+<%--		                    		<div style="width:20%; float:left;">--%>
+<%--		                    			<tr style="text-align:center;">--%>
+<%--										    <td>수량</td>--%>
+<%--										    <td class="bseq_ea"></td>--%>
+<%--										    <hr>--%>
+<%--										</tr>--%>
+
+<%--		                    		</div>--%>
+<%--		                    		<div style="width:20%; float:left;">--%>
+<%--		                    			<fmt:formatNumber value="${cart.product_Price }" pattern="#,###,###"></fmt:formatNumber>원--%>
+<%--		                    		</div>--%>
+<%--		                    	</div>--%>
+<%--	                    	</c:forEach>--%>
+<%--							<form action="/order/product" method="post">--%>
+<%--								<div style="width:30%; float:right;">--%>
+<%--									<div>--%>
+<%--										<c:if test="${sum > 0}">--%>
+<%--										<p>주문 금액</p>--%>
+<%--										<br/>--%>
+<%--										<fmt:formatNumber value="${sum}" pattern="#,###,###"></fmt:formatNumber>원--%>
+<%--											<br/>--%>
+<%--										<input type="submit" value="주문하기">--%>
+<%--										</c:if>--%>
+<%--									</div>--%>
+<%--								</div>--%>
+<%--							</form>--%>
+<%--                    	</div>--%>
                     </div>
                 </main>
             </div>
