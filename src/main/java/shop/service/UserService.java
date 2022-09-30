@@ -11,4 +11,5 @@ public interface UserService extends UserDetailsService {
     String save(RegisterRequest registerRequest);
     List<User> findAll();
     User findByEmail(String email);
+    void deleteUser(String email);
 }

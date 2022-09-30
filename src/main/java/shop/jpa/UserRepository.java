@@ -7,4 +7,5 @@ import shop.entity.UserDomain;
 @Repository
 public interface UserRepository extends JpaRepository<UserDomain, Long> {
     UserDomain findByEmail(String email);
+    void deleteByEmail(String email);
 }

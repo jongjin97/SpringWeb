@@ -72,4 +72,10 @@ public class UserServiceImpl implements UserService {
         shop.dto.User user = modelMapper.map(userDomain, shop.dto.User.class);
         return user;
     }
+
+    @Override
+    @Transactional
+    public void deleteUser(String email) {
+        userRepository.deleteByEmail(email);
+    }
 }

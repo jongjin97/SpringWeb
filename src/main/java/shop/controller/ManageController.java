@@ -5,10 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import shop.dto.User;
 import shop.entity.ProductDomain;
@@ -59,5 +56,12 @@ public class ManageController {
 		List<User> list = userService.findAll();
 		model.addAttribute("list", list);
 		return "manageUser";
+	}
+
+	@PostMapping(value = "manage/deleteUser")
+	public String DeleteUser(@RequestParam("email") String email){
+		userService.deleteUser(email);
+
+		return "redirect:/manage/manageUser";
 	}
 }

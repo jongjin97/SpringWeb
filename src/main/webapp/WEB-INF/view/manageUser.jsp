@@ -46,12 +46,14 @@
 			                    			<p>${list.password }</p>
 			                    		</div>
 			                    		<div style="width:8%; float:left;">
-			                    			<button class="btn btn-primary" value="수정" onclick="location.href='modifyProduct?name=${list.name}'">수정</button>
+			                    			<button class="btn btn-primary" value="수정" onclick="location.href='modifyUser?email=${list.email}'" formmethod="post">수정</button>
 			                    		</div>
 			                    		<div style="width:7%; float:left;">
-			                    			<button class="btn btn-primary" value="삭제" onclick="location.href='deleteProduct?name=${list.name}'">삭제</button>
-			                    		</div>
-			                    	</div>
+											<form method="post" action="/manage/deleteUser?email=${list.email}">
+												<button class="btn btn-primary" value="삭제">삭제</button>
+											</form>
+										</div>
+									</div>
 		                    	</c:forEach>
 	                    	</div>
                     	</div>
