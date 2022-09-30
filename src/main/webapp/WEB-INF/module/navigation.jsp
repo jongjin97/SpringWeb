@@ -50,6 +50,7 @@
 	                                <li><hr class="dropdown-divider" /></li>
 	                                <li><a class="dropdown-item" href="/manage/manageProduct">Manage Products</a></li>
 	                                <li><a class="dropdown-item" href="/manage/manageUser">Manage User</a></li>
+                                    <li><a class="dropdown-item" href="/manage/manageOrder">Manage Order</a></li>
 	                            </ul>
 	                        </li>
                         </sec:authorize>
