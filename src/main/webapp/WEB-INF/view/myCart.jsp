@@ -72,7 +72,7 @@
 											</td>
 											<td style="text-align: center">
 												<form method="post" action="/cart/${cart.id}">
-													<button style="display: inline-block" type="submit">삭제</button>
+													<button style="display: inline-block" type="submit" class="btn btn-primary">삭제</button>
 												</form>
 											</td>
 										</tr>
@@ -97,7 +97,7 @@
 								</table>
 							</div>
 							<form action="/order" method="post">
-								<button type="submit" value="구매">구매</button>
+								<button type="submit" value="구매" class="btn btn-primary">구매</button>
 							</form>
 						</div>
 <%--	                    <div>--%>

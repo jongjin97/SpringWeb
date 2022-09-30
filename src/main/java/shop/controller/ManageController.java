@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,9 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import shop.dto.User;
 import shop.entity.OrderDomain;
-import shop.entity.ProductDomain;
-import shop.entity.UserDomain;
 import shop.dto.Product;
+import shop.entity.UserDomain;
 import shop.service.*;
 
 @Controller
@@ -26,7 +24,9 @@ public class ManageController {
 	@Autowired
 	private UserService userService;
 	@Autowired
-	private PagingAndSortingRepository<OrderDomain, Long> pagingAndSortingRepository;
+	private PagingAndSortingRepository<OrderDomain, Long> orderPagingRepository;
+	@Autowired
+	private PagingAndSortingRepository<UserDomain, Long> userPagingRepository;
 
 	@RequestMapping("manage/manageProduct")
 	public String manageProductView(Model model) {
@@ -58,9 +58,14 @@ public class ManageController {
 	}
 	
 	@RequestMapping(value="manage/manageUser", method=RequestMethod.GET)
-	public String manageUserView(Model model) {
-		List<User> list = userService.findAll();
-		model.addAttribute("list", list);
+	public String manageUserView(Model model, @RequestParam(value = "page", required = false, defaultValue = "0")String page ){
+		//List<User> list = userService.findAll();
+		Page<UserDomain> userList = userPagingRepository.findAll(PageRequest.of(Integer.parseInt(page), 10));
+		int totalPage = userList.getTotalPages();
+
+		model.addAttribute("users", userList.getContent());
+		model.addAttribute("total", totalPage);
+
 		return "manageUser";
 	}
 
@@ -73,7 +78,7 @@ public class ManageController {
 
 	@GetMapping("manage/manageOrder")
 	public String OrderList(Model model, @RequestParam(value = "page", required = false, defaultValue = "0") String page){
-		Page<OrderDomain> orderPage = pagingAndSortingRepository.findAll(PageRequest.of(Integer.parseInt(page), 10));
+		Page<OrderDomain> orderPage = orderPagingRepository.findAll(PageRequest.of(Integer.parseInt(page), 10));
 
 		int totalPage = orderPage.getTotalPages();
 		model.addAttribute("orders", orderPage.getContent());
