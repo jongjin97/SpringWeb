@@ -97,7 +97,7 @@
 								</table>
 							</div>
 							<form action="/order" method="post">
-								<button type="submit" value="구매" class="btn btn-primary">구매</button>
+								<button type="submit" value="구매" class="btn btn-primary" onclick="purchase()">구매</button>
 							</form>
 						</div>
 <%--	                    <div>--%>
@@ -151,5 +151,8 @@
 </body>
 
 <script type="text/javascript">
+	function purchase (){
+		alert("구매 완료");
+	}
 </script>
 </html>
