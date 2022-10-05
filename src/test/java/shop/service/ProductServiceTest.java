@@ -1,10 +1,9 @@
 package shop.service;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.security.core.parameters.P;
 import org.springframework.transaction.annotation.Transactional;
 import shop.dto.Product;
 import shop.entity.ProductDomain;
@@ -20,65 +19,77 @@ import static org.mockito.Mockito.verify;
 @SpringBootTest
 class ProductServiceTest {
 
-    @MockBean
+    @Autowired
     private ProductRepository productRepository;
-    @MockBean
+    @Autowired
     private ProductService productService;
+    Product product;
+    Product product2;
+
+    @BeforeEach
+    void setUp(){
+        product = new Product();
+        product.setFile_name("test");
+        product.setFile_path("test");
+        product.setCategory("test");
+        product.setName("test");
+
+        product2 = new Product();
+        product2.setFile_name("test2");
+        product2.setFile_path("test2");
+        product2.setCategory("test2");
+        product2.setName("test2");
+    }
 
     @Test
     @Transactional
     void remove() {
-        Product product = new Product();
-        product.setName("test");
         productService.save(product);
 
         productService.remove(product.getName());
-        verify(productService).remove(product.getName());
+        ProductDomain productTmp = productRepository.findByName(product.getName());
+
+        assertNull(productTmp);
     }
 
     @Test
     void findAll() {
-        List<Product> domainList = new ArrayList<>();
-        domainList.add(new Product());
-        domainList.add(new Product());
+        List<Product> list = productService.findAll();
 
-        given(productService.findAll()).willReturn(domainList);
-        List<Product> testResult = productService.findAll();
-
-        assertEquals(productService.findAll(), testResult);
-        assertEquals(productService.findAll().size(), 2);
+        assertNotNull(list);
+        assertNotEquals(list.size(), 0);
     }
 
     @Test
+    @Transactional
     void save() {
-        Product product = new Product();
         productService.save(product);
 
-        verify(productService).save(product);
+        Product productTest = productService.findByProductName(product.getName());
+
+        assertNotNull(productTest);
     }
 
     @Test
+    @Transactional
     void findByProductName() {
-        Product product = new Product();
-        product.setName("test");
+        productService.save(product);
 
-        given(productService.findByProductName("test")).willReturn(product);
-        Product testResult = productService.findByProductName("test");
+        Product productTest = productService.findByProductName(product.getName());
 
-        assertEquals(productService.findByProductName("test"), testResult);
-        assertEquals(productService.findByProductName("test").getName(), "test");
+        assertNotNull(productTest);
+        assertEquals(productTest.getName(), product.getName());
     }
 
     @Test
+    @Transactional
     void findByCategory() {
-        List<Product> productList = new ArrayList<>();
-        productList.add(new Product());
-        productList.add(new Product());
+        productService.save(product);
+        productService.save(product2);
 
-        given(productService.findByCategory("test")).willReturn(productList);
-        List<Product> testResult = productService.findByCategory("test");
+        List<Product> productList = productService.findByCategory("test");
 
-        assertEquals(productService.findByCategory("test"), testResult);
-
+        assertNotNull(productList);
+        assertNotEquals(productList.size(), 0);
     }
 }
