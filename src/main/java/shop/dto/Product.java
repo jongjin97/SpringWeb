@@ -1,6 +1,8 @@
 package shop.dto;
 
 import com.sun.istack.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
@@ -9,6 +11,8 @@ import javax.validation.constraints.Min;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Product {
 	private long id;
 	private String name;
