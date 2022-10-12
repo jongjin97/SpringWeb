@@ -1,20 +1,19 @@
-package shop.service.implement;
+package shop.service;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.AdditionalAnswers;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.transaction.annotation.Transactional;
 import shop.config.Role;
 import shop.dto.RegisterRequest;
 import shop.dto.User;
 import shop.entity.UserDomain;
 import shop.jpa.UserRepository;
+import shop.service.implement.UserServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +25,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-class UserServiceImplTest {
+class UserServiceTest {
 
     @Autowired
     private UserServiceImpl userService;
